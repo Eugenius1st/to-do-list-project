@@ -13,7 +13,9 @@ export default function Login() {
             <FontAwesomeIcon icon={faCheck} fontSize="10rem" />
           </CheckIcon>
         </Logo>
+        <Title>Eugenius Todo</Title>
       </LogoWrapper>
+
       <BtnWrapper>
         <Link to="/main" style={{ textDecoration: "none" }}>
           <Btn>Login</Btn>
@@ -27,14 +29,13 @@ export default function Login() {
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  margin: 0 auto;
+  margin: 10% auto;
 `;
 
 const LogoWrapper = styled.div`
   max-width: 18rem;
   height: 18rem;
   margin: 0 auto;
-  margin-top: 10%;
 `;
 
 const Logo = styled.div`
@@ -52,10 +53,19 @@ const CheckIcon = styled.div`
   left: 17%;
   color: white;
 `;
+
+const Title = styled.div`
+  margin-top: 10%;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(190, 125, 200, 0.9);
+`;
+
 const BtnWrapper = styled.div`
   max-width: 18rem;
   margin: 0 auto;
-  margin-top: 2%;
+  margin-top: 5%;
 `;
 
 const Btn = styled.div`
