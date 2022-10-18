@@ -7,7 +7,7 @@ import Edit from "./Pages/Edit";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="to-do-list-project">
         <Routes>
           <Route path="/main" element={<Main />}></Route>
           <Route path="/edit/:id" element={<Edit />}></Route>
