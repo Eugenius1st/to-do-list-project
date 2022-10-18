@@ -5,8 +5,7 @@ import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function Todo({ props }) {
-  const imgs = props;
-  console.log(imgs);
+  const todo = props;
   return (
     <Wrapper>
       <Check>
@@ -15,10 +14,10 @@ export default function Todo({ props }) {
         </CheckIcon>
       </Check>
 
-      <Image src={imgs} />
+      <Image src={todo.url} />
       <ContentWrapper>
-        <Title>Https 공부하기</Title>
-        <Describe>Http와 Https 차이점 공부하기</Describe>
+        <Title>{todo.title}</Title>
+        <Describe>{todo.describe}</Describe>
       </ContentWrapper>
       <Link to="/edit" style={{ textDecoration: "none" }}>
         <FontAwesomeIcon
@@ -33,7 +32,7 @@ export default function Todo({ props }) {
 
 const Wrapper = styled.li`
   display: flex;
-  height: 3.5rem;
+  height: 2.5rem;
   border: 1px solid rgba(95, 111, 185, 0.6);
   margin-bottom: 2%;
   padding: 1% 1%;

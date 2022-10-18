@@ -15,7 +15,7 @@ export default function Login() {
         </Logo>
       </LogoWrapper>
       <BtnWrapper>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/main" style={{ textDecoration: "none" }}>
           <Btn>Login</Btn>
         </Link>
         <Btn>Join</Btn>

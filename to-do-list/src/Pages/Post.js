@@ -1,23 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation, Redirect } from "react-router-dom"; // 추가된 부분
 import styled from "styled-components";
+import axios from "axios";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCheck } from "@fortawesome/free-solid-svg-icons";
 // import { Link } from "react-router-dom";
+import {} from "react-router-dom";
 
 export default function Post() {
+  const location = useLocation(); // 추가된 부분
+  const postId = location.state?.id; // 추가된 부분
+  const [title, setTitle] = useState("");
+  const [imgFile, setImageFile] = useState("");
+  const [date, setDate] = useState();
+  const [categofies, setCategofies] = useState();
+  const [describe, setDescribe] = useState("");
+
+  const onTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onDescribeChange = (e) => {
+    setDescribe(e.target.value);
+    console.log(title);
+  };
+
+  const onSubmit = () => {
+    axios
+      .post("http://localhost:3001/todos", {
+        id: 80,
+        //id 중복 안되게 수정하기
+        url: "images/react.png",
+        title: title,
+        describe: describe,
+        categories: "교양",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        alert("내용을 입력해주세요");
+      });
+    // .then(history.push("/"));
+  };
+
   return (
     <Background>
       <Wrapper>
         <Header>뒤로가기 버튼</Header>
         <PostImg src="images/js.png" />
-        <PostTitle placeholder="제목을 입력하세요"></PostTitle>
+        <PostTitle
+          placeholder="제목을 입력하세요"
+          onChange={onTitleChange}
+        ></PostTitle>
         <PostDetail>
           <StartBtn>시작 날짜</StartBtn>
           <EndBtn>종료 날짜</EndBtn>
           <Category>카테고리</Category>
         </PostDetail>
-        <PostDescribe></PostDescribe>
-        <PostBtn>작성완료</PostBtn>
+        <PostDescribe
+          placeholder="내용을 입력하세요"
+          onChange={onDescribeChange}
+        ></PostDescribe>
+        <PostBtn onClick={onSubmit}>작성완료</PostBtn>
       </Wrapper>
     </Background>
   );
@@ -25,7 +70,7 @@ export default function Post() {
 
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(
     0deg,
     rgba(233, 89, 150, 0.5),
@@ -42,11 +87,11 @@ const Header = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 40rem;
-  height: 100vh;
+  max-width: 30rem;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
 `;
 
 const PostImg = styled.img`
