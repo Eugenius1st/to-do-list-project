@@ -33,11 +33,9 @@ export default function Main() {
         </BtnWrapper>
       </UserWrapper>
       <Todos>
-        <Link to="/detail" style={{ textDecoration: "none" }}>
-          {todoList.map((el) => {
-            return <Todo key={el.id} props={el} />;
-          })}
-        </Link>
+        {todoList.map((el) => {
+          return <Todo key={el.id} props={el} />;
+        })}
       </Todos>
       <Link
         to="/post"
@@ -142,6 +140,7 @@ const CreateBtn = styled.div`
   padding: 0.5rem;
   font-weight: bold;
   color: white;
+  border-radius: 17px;
   background: linear-gradient(
     0deg,
     rgba(233, 89, 150, 0.8),

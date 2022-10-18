@@ -1,11 +1,33 @@
-import React from "react";
+import * as React from "react";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import axios from "axios";
 
 export default function Todo({ props }) {
   const todo = props;
+  const id = todo.id;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onDelete = () => {
+    axios
+      .delete(`http://localhost:3001/todos/${id}`)
+      .then(function (response) {
+        console.log(response);
+        handleClose();
+        window.location.reload();
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+  };
   return (
     <Wrapper>
       <Check>
@@ -15,17 +37,39 @@ export default function Todo({ props }) {
       </Check>
 
       <Image src={todo.url} />
-      <ContentWrapper>
-        <Title>{todo.title}</Title>
-        <Describe>{todo.describe}</Describe>
-      </ContentWrapper>
-      <Link to="/edit" style={{ textDecoration: "none" }}>
+      <Link
+        to={`/edit/${id}`}
+        state={{ info: todo }}
+        style={{ textDecoration: "none" }}
+      >
+        <ContentWrapper>
+          <Title>{todo.title}</Title>
+          <Describe>{todo.describe}</Describe>
+        </ContentWrapper>
+      </Link>
+      <DeleteWrapper onClick={handleOpen}>
         <FontAwesomeIcon
           icon={faEllipsisVertical}
           fontSize="1.4rem"
           color="gray"
         />
-      </Link>
+      </DeleteWrapper>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h4">
+              삭제하시겠습니까?
+            </Typography>
+            <ConfirmBtn onClick={onDelete}>확인</ConfirmBtn>
+          </Box>
+        </Modal>
+      </div>
+      {/* </Link> */}
     </Wrapper>
   );
 }
@@ -70,7 +114,7 @@ const Image = styled.img`
 const ContentWrapper = styled.div`
   margin-left: 2%;
   padding-left: 1%;
-  width: 77%;
+  width: 20rem;
 `;
 
 const Title = styled.div`
@@ -83,3 +127,38 @@ const Describe = styled.div`
   font-size: 0.2rem;
   color: gray;
 `;
+
+const DeleteWrapper = styled.div`
+  padding: 0 2%;
+  margin-left: 1rem;
+  text-align: end;
+`;
+
+const ConfirmBtn = styled.button`
+  padding: 1%;
+  margin-top: 2%;
+  width: 50%;
+  border: 1px solid rgb(95, 111, 185);
+  border-radius: 50px;
+  outline: 0;
+  background: transparent;
+  font-weight: bold;
+  color: rgb(95, 111, 185);
+  &:hover {
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(0deg, rgb(233, 89, 150), rgb(95, 111, 185));
+  }
+`;
+
+const style = {
+  textAlign: "center",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 200,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 2,
+};

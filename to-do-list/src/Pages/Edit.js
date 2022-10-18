@@ -1,23 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useLocation, useNavigate, useParams } from "react-router-dom"; // 추가된 부분
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function Edit() {
+  const navigate = useNavigate();
+  const location = useLocation(); // 추가된 부분
+  let info = location.state?.info; // 추가된 부분
+  let { id } = useParams();
+
+  const [title, setTitle] = useState(info.title);
+  const [imgFile, setImageFile] = useState(info.url);
+  const [date, setDate] = useState();
+  const [categofies, setCategofies] = useState();
+  const [describe, setDescribe] = useState(info.describe);
+
+  const onUpdate = () => {
+    axios
+      .put(`http://localhost:3001/todos/${id}`, {
+        id: id,
+        url: imgFile,
+        title: title,
+        describe: describe,
+        categories: "교양",
+      })
+      .then(function (response) {
+        console.log(response);
+        navigate("/main");
+      })
+      .catch(function (error) {
+        console.log({
+          id: id,
+          url: imgFile,
+          title: title,
+          describe: describe,
+          categories: "교양",
+        });
+        alert("내용을 입력해주세요");
+      });
+  };
+
+  const onTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onDescribeChange = (e) => {
+    setDescribe(e.target.value);
+  };
+
   return (
     <Background>
       <Wrapper>
-        <Header>뒤로가기 버튼</Header>
-        <PostImg src="images/js.png" />
-        <PostTitle placeholder="제목을 입력하세요"></PostTitle>
+        <Header>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            onClick={() => navigate(-1)}
+            fontSize="1.7rem"
+          />
+        </Header>
+        <PostImg src={imgFile} />
+        <PostTitle
+          value={title}
+          placeholder="제목을 입력하세요"
+          onChange={onTitleChange}
+        ></PostTitle>
         <PostDetail>
           <StartBtn>시작 날짜</StartBtn>
           <EndBtn>종료 날짜</EndBtn>
           <Category>카테고리</Category>
         </PostDetail>
-        <PostDescribe></PostDescribe>
-        <PostBtn>작성완료</PostBtn>
+        <PostDescribe
+          value={describe}
+          placeholder="내용을 입력하세요"
+          onChange={onDescribeChange}
+        ></PostDescribe>
+        <PostBtn onClick={onUpdate}>수정완료</PostBtn>
       </Wrapper>
     </Background>
   );
@@ -34,11 +93,13 @@ const Background = styled.div`
 `;
 
 const Header = styled.div`
-  height: 2rem;
-  padding: 2%;
+  height: 1rem;
+  padding: 3%;
   margin: 0 auto;
   margin-bottom: 2%;
-  border: 1px solid red;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: start;
+  color: rgb(95, 111, 195);
 `;
 
 const Wrapper = styled.div`
