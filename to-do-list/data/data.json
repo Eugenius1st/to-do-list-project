@@ -2,30 +2,23 @@
   "todos": [
     {
       "id": 0,
-      "url": "images/git.png",
-      "title": "책 10분 읽기ddddddddd",
-      "describe": "부의 추월차선 읽기.ddddddd",
+      "url": "images/js.png",
+      "title": "Todo list 작성 수정",
+      "describe": "Todo list 작성 수정",
       "categories": "교양"
     },
     {
       "id": 1,
-      "url": "images/react.png",
-      "title": "책 10분 읽기",
-      "describe": "부의 추월차선 읽기.",
+      "url": "images/git.png",
+      "title": "수정하는 부분",
+      "describe": "수정하는 부분",
       "categories": "교양"
     },
     {
-      "id": 6,
+      "id": 2,
       "url": "images/react.png",
-      "title": "ㅇㅇㅇㅇ",
-      "describe": "ㅇㅇㅇㅇㅇ",
-      "categories": "교양"
-    },
-    {
-      "id": 3,
-      "url": "images/react.png",
-      "title": "ㅇㅇ",
-      "describe": "ㅇㅇ",
+      "title": "https 복습",
+      "describe": "https 복습",
       "categories": "교양"
     }
   ]

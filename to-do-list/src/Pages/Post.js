@@ -31,7 +31,7 @@ export default function Post() {
       .post("http://localhost:3001/todos", {
         id: postId,
         //id 중복 안되게 수정하기
-        url: "images/react.png",
+        url: "images/eugenius.jpg",
         title: title,
         describe: describe,
         categories: "교양",
@@ -56,7 +56,8 @@ export default function Post() {
             fontSize="1.7rem"
           />
         </Header>
-        <PostImg src="images/js.png" />
+
+        <PostImg src={process.env.PUBLIC_URL + "/images/eugenius.jpg"} />
         <PostTitle
           placeholder="제목을 입력하세요"
           onChange={onTitleChange}

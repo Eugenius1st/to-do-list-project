@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom"; // 추가된 부분
@@ -60,7 +60,7 @@ export default function Edit() {
             fontSize="1.7rem"
           />
         </Header>
-        <PostImg src={imgFile} />
+        <PostImg src={process.env.PUBLIC_URL + `/${imgFile}`} />
         <PostTitle
           value={title}
           placeholder="제목을 입력하세요"
@@ -81,10 +81,12 @@ export default function Edit() {
     </Background>
   );
 }
-
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  margin-left: -1rem;
+  margin-top: -1rem;
+  padding-bottom: 1rem;
   background: linear-gradient(
     0deg,
     rgba(233, 89, 150, 0.5),
@@ -103,11 +105,12 @@ const Header = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 40rem;
-  height: 100vh;
+  max-width: 30rem;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 1rem;
 `;
 
 const PostImg = styled.img`

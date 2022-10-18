@@ -22,7 +22,10 @@ export default function Main() {
     <Wrapper>
       <UserWrapper>
         <UserImgWrapper>
-          <UserImg src="images/eugenius.jpg" alt="eugenius"></UserImg>
+          <UserImg
+            src={process.env.PUBLIC_URL + "/images/eugenius.jpg"}
+            alt="eugenius"
+          ></UserImg>
         </UserImgWrapper>
         <UserName> Eugenius1st</UserName>
         <UserProfile> 프론트엔드 개발자</UserProfile>
@@ -140,7 +143,7 @@ const CreateBtn = styled.div`
   padding: 0.5rem;
   font-weight: bold;
   color: white;
-  border-radius: 17px;
+  border-radius: 15px;
   background: linear-gradient(
     0deg,
     rgba(233, 89, 150, 0.8),
