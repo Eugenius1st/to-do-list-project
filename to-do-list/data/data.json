@@ -2,9 +2,9 @@
   "todos": [
     {
       "id": 0,
-      "url": "images/git.png",
-      "title": "책 10분 읽기ddddddddd",
-      "describe": "부의 추월차선 읽기.ddddddd",
+      "url": "images/js.png",
+      "title": "ㅇㅇㅇㅇ",
+      "describe": "ㅇㅇㅇㅇㅇ",
       "categories": "교양"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "id": 3,
-      "url": "images/react.png",
+      "url": "images/git.png",
       "title": "ㅇㅇ",
       "describe": "ㅇㅇ",
       "categories": "교양"

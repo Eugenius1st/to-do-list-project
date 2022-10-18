@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom"; // 추가된 부분
