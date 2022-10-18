@@ -1,36 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import Todo from "../Components/Todo";
-
+import Todo from "./Todo";
+/* "images/git.png","images/js.png","images/react.png","images/CSS.png"
+"images/git.png","images/js.png","images/react.png"} /> */
 export default function Main() {
+  const [todoList, setTodoList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/todos")
+      .then((Response) => {
+        setTodoList(Response.data);
+      })
+      .catch((Error) => {
+        alert(Error);
+      });
+  }, []);
+
   return (
     <Wrapper>
       <UserWrapper>
         <UserImgWrapper>
           <UserImg src="images/eugenius.jpg" alt="eugenius"></UserImg>
         </UserImgWrapper>
-        Eugenius1st
+        <UserName> Eugenius1st</UserName>
+        <UserProfile> 프론트엔드 개발자</UserProfile>
+
         <BtnWrapper>
           <FilterBtn>전체보기</FilterBtn>
           <FollowerBtn>❤️199,808</FollowerBtn>
         </BtnWrapper>
       </UserWrapper>
       <Todos>
-        <Link to="/detail" style={{ textDecoration: "none" }}>
-          <Todo props={"images/CSS.png"} />
-        </Link>
-        <Todo props={"images/git.png"} />
-        <Todo props={"images/js.png"} />
-        <Todo props={"images/react.png"} />
-        <Todo props={"images/CSS.png"} />
-        <Todo props={"images/git.png"} />
-        <Todo props={"images/js.png"} />
-        <Todo props={"images/react.png"} />
+        {todoList.map((el) => {
+          return <Todo key={el.id} props={el} />;
+        })}
       </Todos>
-      <Link to="/post" style={{ textDecoration: "none" }}>
+      <Link
+        to="/post"
+        state={{ id: todoList.length }}
+        style={{ textDecoration: "none" }}
+      >
         <CreateBtn>Creat New Todo</CreateBtn>
       </Link>
     </Wrapper>
@@ -65,6 +76,19 @@ const UserImg = styled.img`
   left: 2.5%;
   border-radius: 50%;
   position: absolute;
+`;
+
+const UserName = styled.div`
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 2%;
+  margin-bottom: 1%;
+`;
+const UserProfile = styled.div`
+  text-align: center;
+  color: gray;
+  font-size: 0.7rem;
 `;
 
 const BtnWrapper = styled.div`
@@ -103,7 +127,7 @@ const Todos = styled.div`
   max-width: 30rem;
   padding: 0.5rem;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 4.5rem;
 `;
 
 const CreateBtn = styled.div`
@@ -116,6 +140,7 @@ const CreateBtn = styled.div`
   padding: 0.5rem;
   font-weight: bold;
   color: white;
+  border-radius: 17px;
   background: linear-gradient(
     0deg,
     rgba(233, 89, 150, 0.8),
