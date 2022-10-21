@@ -75,8 +75,6 @@ export default function Todo({ props }) {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {/* sx={style} */}
-
             <Typography id="modal-modal-title" variant="h6" component="h4">
               삭제하시겠습니까?
             </Typography>
@@ -84,7 +82,6 @@ export default function Todo({ props }) {
           </Box>
         </Modal>
       </div>
-      {/* </Link> */}
     </Wrapper>
   );
 }
