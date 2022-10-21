@@ -1,44 +1,45 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import axios from "axios";
-import { useLocation, useNavigate, useParams } from "react-router-dom"; // 추가된 부분
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { useLocation, useNavigate, useParams } from 'react-router-dom'; // 추가된 부분
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function Edit() {
   const navigate = useNavigate();
   const location = useLocation(); // 추가된 부분
-  let info = location.state?.info; // 추가된 부분
-  let { id } = useParams();
+  const info = location.state?.info; // 추가된 부분
+  const { id } = useParams();
 
   const [title, setTitle] = useState(info.title);
-  const [imgFile, setImageFile] = useState(info.url);
-  const [date, setDate] = useState();
-  const [categofies, setCategofies] = useState();
+  const [imgFile, setImageFile] = useState(info.url); //eslint-disable-line
+
+  //  const [date, setDate] = useState();
+
   const [describe, setDescribe] = useState(info.describe);
 
   const onUpdate = () => {
     axios
       .put(`http://localhost:3001/todos/${id}`, {
-        id: id,
+        id,
         url: imgFile,
-        title: title,
-        describe: describe,
-        categories: "교양",
+        title,
+        describe,
+        categories: '교양',
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
-        navigate("/main");
+        navigate('/main');
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log({
-          id: id,
+          id,
           url: imgFile,
-          title: title,
-          describe: describe,
-          categories: "교양",
+          title,
+          describe,
+          categories: '교양',
         });
-        alert("내용을 입력해주세요");
+        alert(error);
       });
   };
 
@@ -60,12 +61,12 @@ export default function Edit() {
             fontSize="1.7rem"
           />
         </Header>
-        <PostImg src={process.env.PUBLIC_URL + `/${imgFile}`} />
+        <PostImg src={`${process.env.PUBLIC_URL}/${imgFile}`} />
         <PostTitle
           value={title}
           placeholder="제목을 입력하세요"
           onChange={onTitleChange}
-        ></PostTitle>
+        />
         <PostDetail>
           <StartBtn>시작 날짜</StartBtn>
           <EndBtn>종료 날짜</EndBtn>
@@ -75,7 +76,7 @@ export default function Edit() {
           value={describe}
           placeholder="내용을 입력하세요"
           onChange={onDescribeChange}
-        ></PostDescribe>
+        />
         <PostBtn onClick={onUpdate}>수정완료</PostBtn>
       </Wrapper>
     </Background>

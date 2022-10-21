@@ -1,16 +1,16 @@
-import * as React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import axios from "axios";
+import * as React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import axios from 'axios';
 
 export default function Todo({ props }) {
   const todo = props;
-  const id = todo.id;
+  const { id } = todo;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,15 +18,28 @@ export default function Todo({ props }) {
   const onDelete = () => {
     axios
       .delete(`http://localhost:3001/todos/${id}`)
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
         handleClose();
         window.location.reload();
       })
-      .catch(function (error) {
+      .catch((error) => {
         alert(error);
       });
   };
+
+  const style = {
+    textAlign: 'center',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 200,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 2,
+  };
+
   return (
     <Wrapper>
       <Check>
@@ -36,11 +49,11 @@ export default function Todo({ props }) {
       </Check>
       {/* src={process.env.PUBLIC_URL + "/ */}
       {/* <Image src={todo.url} /> */}
-      <Image src={process.env.PUBLIC_URL + `/${todo.url}`} alt={id} />
+      <Image src={`${process.env.PUBLIC_URL}/${todo.url}`} alt={id} />
       <Link
         to={`/edit/${id}`}
         state={{ info: todo }}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: 'none' }}
       >
         <ContentWrapper>
           <Title>{todo.title}</Title>
@@ -62,6 +75,8 @@ export default function Todo({ props }) {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
+            {/* sx={style} */}
+
             <Typography id="modal-modal-title" variant="h6" component="h4">
               삭제하시겠습니까?
             </Typography>
@@ -150,15 +165,3 @@ const ConfirmBtn = styled.button`
     background: linear-gradient(0deg, rgb(233, 89, 150), rgb(95, 111, 185));
   }
 `;
-
-const style = {
-  textAlign: "center",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 200,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 2,
-};

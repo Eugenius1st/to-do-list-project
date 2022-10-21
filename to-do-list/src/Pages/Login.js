@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -17,7 +17,7 @@ export default function Login() {
       </LogoWrapper>
 
       <BtnWrapper>
-        <Link to="/main" style={{ textDecoration: "none" }}>
+        <Link to="/main" style={{ textDecoration: 'none' }}>
           <Btn>Login</Btn>
         </Link>
         <Btn>Join</Btn>
@@ -84,4 +84,3 @@ const Btn = styled.div`
     color: white;
   }
 `;
-//rgb(95, 111, 185)

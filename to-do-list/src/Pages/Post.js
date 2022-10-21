@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // 추가된 부분
-import styled from "styled-components";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; // 추가된 부분
+import styled from 'styled-components';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function Post() {
   const location = useLocation(); // 추가된 부분
-  let postId = location.state?.id; // 추가된 부분
+  const postId = location.state?.id; // 추가된 부분
   const navigate = useNavigate();
-  console.log("postId", postId);
+  console.log('postId', postId);
 
-  const [title, setTitle] = useState("");
-  const [imgFile, setImageFile] = useState("");
-  const [date, setDate] = useState();
-  const [categofies, setCategofies] = useState();
-  const [describe, setDescribe] = useState("");
+  const [title, setTitle] = useState('');
+  //  const [imgFile, setImageFile] = useState("");
+  //  const [date, setDate] = useState();
+  // const [categofies, setCategofies] = useState();
+  const [describe, setDescribe] = useState('');
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -28,20 +28,20 @@ export default function Post() {
 
   const onSubmit = () => {
     axios
-      .post("http://localhost:3001/todos", {
+      .post('http://localhost:3001/todos', {
         id: postId,
-        //id 중복 안되게 수정하기
-        url: "images/eugenius.jpg",
-        title: title,
-        describe: describe,
-        categories: "교양",
+        // id 중복 안되게 수정하기
+        url: 'images/eugenius.jpg',
+        title,
+        describe,
+        categories: '교양',
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
-        navigate("/main");
+        navigate('/main');
       })
-      .catch(function (error) {
-        alert("내용을 입력해주세요");
+      .catch((error) => {
+        alert(error);
       });
     // .then(history.push("/"));
   };
@@ -57,11 +57,8 @@ export default function Post() {
           />
         </Header>
 
-        <PostImg src={process.env.PUBLIC_URL + "/images/eugenius.jpg"} />
-        <PostTitle
-          placeholder="제목을 입력하세요"
-          onChange={onTitleChange}
-        ></PostTitle>
+        <PostImg src={`${process.env.PUBLIC_URL}/images/eugenius.jpg`} />
+        <PostTitle placeholder="제목을 입력하세요" onChange={onTitleChange} />
         <PostDetail>
           <StartBtn>시작 날짜</StartBtn>
           <EndBtn>종료 날짜</EndBtn>
@@ -70,7 +67,7 @@ export default function Post() {
         <PostDescribe
           placeholder="내용을 입력하세요"
           onChange={onDescribeChange}
-        ></PostDescribe>
+        />
         <PostBtn onClick={onSubmit}>작성완료</PostBtn>
       </Wrapper>
     </Background>

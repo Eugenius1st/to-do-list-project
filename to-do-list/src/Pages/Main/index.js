@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Todo from "./Todo";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Todo from './Todo';
 /* "images/git.png","images/js.png","images/react.png","images/CSS.png"
 "images/git.png","images/js.png","images/react.png"} /> */
 export default function Main() {
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/todos")
+      .get('http://localhost:3001/todos')
       .then((Response) => {
         setTodoList(Response.data);
       })
@@ -23,9 +23,9 @@ export default function Main() {
       <UserWrapper>
         <UserImgWrapper>
           <UserImg
-            src={process.env.PUBLIC_URL + "/images/eugenius.jpg"}
+            src={`${process.env.PUBLIC_URL}/images/eugenius.jpg`}
             alt="eugenius"
-          ></UserImg>
+          />
         </UserImgWrapper>
         <UserName> Eugenius1st</UserName>
         <UserProfile> 프론트엔드 개발자</UserProfile>
@@ -36,14 +36,14 @@ export default function Main() {
         </BtnWrapper>
       </UserWrapper>
       <Todos>
-        {todoList.map((el) => {
-          return <Todo key={el.id} props={el} />;
-        })}
+        {todoList.map((el) => (
+          <Todo key={el.id} props={el} />
+        ))}
       </Todos>
       <Link
         to="/post"
         state={{ id: todoList.length }}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: 'none' }}
       >
         <CreateBtn>Creat New Todo</CreateBtn>
       </Link>
@@ -152,4 +152,4 @@ const CreateBtn = styled.div`
   text-align: center;
 `;
 
-//background: linear-gradient(35deg, rgb(233, 89, 150), rgb(95, 111, 185));
+// background: linear-gradient(35deg, rgb(233, 89, 150), rgb(95, 111, 185));
